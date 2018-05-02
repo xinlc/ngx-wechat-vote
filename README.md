@@ -1,5 +1,10 @@
 # NgxWechatVote
 
+## Example
+<img src='./doc/demo1.jpeg' width="300px" />
+<img src='./doc/demo2.jpeg' width="300px" />
+<img src='./doc/demo3.jpeg' width="300px" />
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
 ## Development server
@@ -25,3 +30,12 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## Documents
+
+* [angular](https://angular.io/docs)
+* [angular cn](https://angular.cn/docs)
+* [ngx-weui](https://github.com/cipchk/ngx-weui)
+* [material](https://material.angular.io/)
+* [material icons](https://material.io/icons/)
