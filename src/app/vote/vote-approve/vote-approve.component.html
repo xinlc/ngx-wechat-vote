@@ -1,0 +1,15 @@
+<weui-infiniteloader (loadmore)="onLoadMore($event)" #compApprove>
+  <div class="weui-cells__title">审核参加活动人员</div>
+  <div class="weui-cells" class="list">
+    <a *ngFor="let item of voters; let i = index" [attr.data-index]="i" class="weui-cell weui-cell_access" href="javascript:;">
+      <div>
+        <img class="photo" [src]="item.photos[0] + '/300'" alt="头像" />
+      </div>
+      <div>{{ item.name }}</div>
+      <div>{{ item.phone }}</div>
+      <div>
+        <button weui-button weui-mini (click)="onPass(item)">通过</button>
+      </div>
+    </a>
+  </div>
+</weui-infiniteloader>

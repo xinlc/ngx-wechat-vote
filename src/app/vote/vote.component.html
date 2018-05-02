@@ -1,0 +1,141 @@
+<weui-tabbar>
+  <weui-tab heading="首页" [icon]="'<i class=\'mat-icon material-icons\' >home</i>'">
+    <weui-infiniteloader (loadmore)="onLoadMore($event)" #comp>
+    <div>
+      <img width="100%" src="http://dl.bizhi.sogou.com/images/2012/02/11/25025.jpg" />
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="vote-count">
+      <div fxFlex>
+        <p>参与选手</p>
+        <p>{{ activity?.totalEnroll }}</p>
+      </div>
+      <div fxFlex class="left-border">
+        <p>累计投票</p>
+        <p>{{ activity?.totalVoteNumbers }}</p>
+      </div>
+    </div>
+    <div class="activity-intro">
+      <div class="weui-cells__title">活动简介</div>
+      <div class="weui-cells">
+        <div class="weui-cell">
+          <div class="weui-cell__hd">
+            <mat-icon>access_time</mat-icon>
+          </div>
+          <div class="weui-cell__bd">
+            <p>开始时间</p>
+          </div>
+          <div class="weui-cell__ft">{{ activity?.beginTime }}</div>
+        </div>
+
+        <div class="weui-cell">
+          <div class="weui-cell__hd">
+            <mat-icon>access_time</mat-icon>
+          </div>
+          <div class="weui-cell__bd">
+            <p>截止时间</p>
+          </div>
+          <div class="weui-cell__ft">{{ activity?.endTime }}</div>
+        </div>
+
+        <div class="weui-cell">
+          <div class="weui-cell__hd">
+            <mat-icon>report_problem</mat-icon>
+          </div>
+          <div class="weui-cell__bd" style="flex:initial;">
+            <p>投票规则</p>
+          </div>
+          <div class="weui-cell__ft" style="flex:1; text-align: left; margin-left: 10px;">
+            每个微信每天能投{{ activity?.limitNumberPerDay }}票，每天可为同一选手投1票
+          </div>
+        </div>
+
+        <div class="weui-cell">
+          <div class="weui-cell__hd">
+            <mat-icon>local_activity</mat-icon>
+          </div>
+          <div class="weui-cell__bd">
+            <p>活动介绍</p>
+          </div>
+          <div class="weui-cell__ft">
+            xxxxxxxxxx
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<mat-list class="activity-desc">-->
+      <!--<mat-list-item>-->
+        <!--<mat-icon mat-list-icon>access_time</mat-icon>-->
+        <!--<p>开始时间：{{ activity?.beginTime }}</p>-->
+      <!--</mat-list-item>-->
+      <!--<mat-divider></mat-divider>-->
+      <!--<mat-list-item>-->
+        <!--<mat-icon mat-list-icon>access_time</mat-icon>-->
+        <!--<p>截止时间：{{ activity?.endTime }}</p>-->
+      <!--</mat-list-item>-->
+      <!--<mat-divider></mat-divider>-->
+      <!--<mat-list-item>-->
+        <!--<mat-icon mat-list-icon>report_problem</mat-icon>-->
+        <!--<p>投票规则：每个微信每天能投{{ activity?.limitNumberPerDay }}票，每天可为同一选手投1票</p>-->
+      <!--</mat-list-item>-->
+      <!--<mat-divider></mat-divider>-->
+      <!--<mat-list-item>-->
+        <!--<mat-icon mat-list-icon>local_activity</mat-icon>-->
+        <!--<p>活动介绍：xxxxxxxx</p>-->
+      <!--</mat-list-item>-->
+      <!--<mat-divider></mat-divider>-->
+    <!--</mat-list>-->
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+       <weui-searchbar fxFill
+        (search)="onSearch($event)"
+        (cancel)="onCancel()"
+        (clear)="onClear()"
+        (submit)="onSubmit($event)"></weui-searchbar>
+
+      <!--<mat-form-field class="search-field">-->
+        <!--<input matInput type="text" placeholder="输入选手名称或编号" [(ngModel)]="searchValue"/>-->
+        <!--<button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">-->
+          <!--<mat-icon>close</mat-icon>-->
+        <!--</button>-->
+      <!--</mat-form-field>-->
+      <!--<button (click)="search()" mat-raised-button color="accent">搜索</button>-->
+
+    </div>
+    <mat-grid-list cols="3" gutterSize="10px" rowHeight="190px" class="list">
+      <mat-grid-tile
+        *ngFor="let item of voters"
+      >
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <img (click)="openDetail(item)" [src]="item.photos[0] + '/300'" alt="图片" />
+          <p>{{ item.id.padStart(4, '0') }} {{ item.name }}</p>
+          <button (click)="vote(item)" mat-icon-button color="accent">
+            <mat-icon>favorite</mat-icon>
+          </button>
+          <p>{{ item.numbers }}票</p>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <!--<div fxLayout="row" fxLayoutAlign="center center" class="more">-->
+      <!--<button *ngIf="!noData" (click)="loadMore()" mat-raised-button color="accent">加载更多</button>-->
+      <!--<p *ngIf="noData">-->
+        <!--我是有底线的-->
+      <!--</p>-->
+    <!--</div>-->
+    </weui-infiniteloader>
+  </weui-tab>
+
+  <weui-tab heading="排行榜" [icon]="'<i class=\'mat-icon material-icons\' >list</i>'">
+    <app-vote-ranking-list></app-vote-ranking-list>
+  </weui-tab>
+
+  <weui-tab heading="参加活动" [icon]="'<i class=\'mat-icon material-icons\' >perm_identity</i>'">
+    <app-vote-join></app-vote-join>
+  </weui-tab>
+
+
+  <weui-tab *ngIf="hasApproveAccess" heading="审核" [icon]="'<i class=\'mat-icon material-icons\' >verified_user</i>'">
+    <app-approve></app-approve>
+  </weui-tab>
+</weui-tabbar>
+<router-outlet></router-outlet>

@@ -1,0 +1,14 @@
+<weui-ptr (refresh)="onRefresh($event)" >
+<div class="weui-cells__title">排行榜（前20名）</div>
+<div class="weui-cells" class="ranking">
+  <a *ngFor="let item of voters; let i = index" [attr.data-index]="i" class="weui-cell weui-cell_access" [routerLink]="'/vote/' + item.id">
+
+    <div class="weui-cell__hd">{{ i+1 }}</div>
+    <div>
+      <img class="photo" [src]="item.photos[0] + '/300'" alt="头像" />
+    </div>
+    <div>{{ item.name }}</div>
+    <div>{{ item.numbers }}票</div>
+  </a>
+</div>
+</weui-ptr>

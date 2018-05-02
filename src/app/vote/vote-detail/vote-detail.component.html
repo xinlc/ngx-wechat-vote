@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="weui-cells__title">TA 的信息</div>
+  <div class="weui-cells">
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <p>姓名</p>
+      </div>
+      <div class="weui-cell__ft">{{ detail?.name }}</div>
+    </div>
+    <!--<div class="weui-cell">-->
+      <!--<div class="weui-cell__bd">-->
+        <!--<p>手机号</p>-->
+      <!--</div>-->
+      <!--<div class="weui-cell__ft">{{ detail?.phone }}</div>-->
+    <!--</div>-->
+
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <p>排行</p>
+      </div>
+      <div class="weui-cell__ft">{{ detail?.ranking }}</div>
+    </div>
+
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <p>票数</p>
+      </div>
+      <div class="weui-cell__ft">{{ detail?.numbers }}</div>
+    </div>
+
+    <div class="weui-cell"
+         *ngFor="let item of detail?.photos"
+    >
+      <img width="100%" [src]="item" alt="图片" />
+    </div>
+  </div>
+</div>

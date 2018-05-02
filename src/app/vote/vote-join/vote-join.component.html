@@ -1,0 +1,104 @@
+<ng-container *ngIf="!me?.phone">
+  <div class="container">
+    <form #f="ngForm" (ngSubmit)="onSave()">
+      <div class="weui-cells__title">填写个人信息</div>
+      <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+          <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+          <div class="weui-cell__bd">
+            <input class="weui-input" type="text" [(ngModel)]="name" name="name" placeholder="请输入姓名"
+                   weui-input="text" maxlength="10" weui-required>
+          </div>
+        </div>
+
+        <div class="weui-cell">
+          <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+          <div class="weui-cell__bd">
+            <input class="weui-input" type="tel" [(ngModel)]="mobile" name="mobile" placeholder="请输入手机号"
+                   weui-input="mobile" weui-required>
+          </div>
+        </div>
+
+        <div class="weui-cell">
+          <div class="weui-cell__bd">
+            <div class="weui-uploader">
+              <div class="weui-uploader__hd">
+                <p class="weui-uploader__title">照片</p>
+                <div class="weui-uploader__info">{{uploader?.queue?.length}}/{{imgLimit}}</div>
+              </div>
+              <div class="weui-uploader__bd">
+                <ul class="weui-uploader__files">
+                  <li class="weui-uploader__file" *ngFor="let item of uploader.queue"
+                      [weui-thumb]="item._file"
+                      (click)="onGallery(item)"
+                      [ngClass]="{'weui-uploader__file_status': item.isError}">
+                    <div class="weui-uploader__file-content" *ngIf="item.isUploading">{{item.progress}}%</div>
+                    <div class="weui-uploader__file-content" *ngIf="item.isError">
+                      <i class="weui-icon-warn"></i>
+                    </div>
+                  </li>
+                </ul>
+                <div class="weui-uploader__input-box">
+                  <input class="weui-uploader__input" type="file" name="uploader" accept="image/*" multiple
+                         [weui-uploader-file]="uploader"  weui-required>
+                </div>
+              </div>
+            </div>
+            <weui-gallery [imgs]="img" [(show)]="imgShow" (delete)="onDel($event)"></weui-gallery>
+          </div>
+        </div>
+      </div>
+      <div class="weui-btn-area">
+        <button class="weui-btn weui-btn_primary"
+                [disabled]="!f.form.valid || !f.form.dirty || uploader.queue.length == 0"
+                [ngClass]="{'weui-btn_disabled': !f.form.valid || !f.form.dirty || uploader.queue.length == 0}">确定</button>
+      </div>
+    </form>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="me?.phone">
+<div class="container">
+    <div class="weui-cells__title">个人信息</div>
+    <div class="weui-cells">
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>姓名</p>
+        </div>
+        <div class="weui-cell__ft">{{ me.name }}</div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <p>手机号</p>
+        </div>
+        <div class="weui-cell__ft">{{ me.phone }}</div>
+      </div>
+
+      <div class="weui-cell" *ngIf="me?.hasPassEnroll">
+        <div class="weui-cell__bd">
+          <p>排行</p>
+        </div>
+        <div class="weui-cell__ft">{{ me.ranking }}</div>
+      </div>
+
+      <div class="weui-cell" *ngIf="me?.hasPassEnroll">
+        <div class="weui-cell__bd">
+          <p>票数</p>
+        </div>
+        <div class="weui-cell__ft">{{ me.numbers }}</div>
+      </div>
+
+      <div class="weui-cell"
+         *ngFor="let item of me.photos"
+      >
+        <img width="100%" [src]="item" alt="图片" />
+      </div>
+    </div>
+
+    <div class="weui-btn-area" *ngIf="!me?.hasPassEnroll">
+      <button class="weui-btn weui-btn_primary"
+              disabled
+              ngClass="weui-btn_disabled">审核中</button>
+    </div>
+</div>
+</ng-container>
