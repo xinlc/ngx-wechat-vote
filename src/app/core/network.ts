@@ -1,6 +1,6 @@
 
-// const API_ROOT = 'http://localhost:4200/api'; // 开发跨域 查看对应proxy.conf.json文件
-const API_ROOT = 'localapi'; // 开发
+// const API_ROOT = 'http://localhost:4200/corsapi'; // 开发跨域 查看对应proxy.conf.json文件 , target 为要访问的地址
+const API_ROOT = '';
 // const API_ROOT = 'https://xxx'; // 生产
 
 const API_ROOT_DOMAIN = API_ROOT;
@@ -9,7 +9,7 @@ class Network {
   static API_ROOT = API_ROOT;
 
   // vote
-  static VOTE_URL = `${API_ROOT_DOMAIN}/broker/vote`;
+  static VOTE_URL = 'api/voters';
 
   // OSS
   static STS_URL = `${API_ROOT_DOMAIN}/sts`;

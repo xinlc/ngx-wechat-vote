@@ -32,7 +32,7 @@ export class HttpErrorHandler {
       // TODO: send the error to remote logging infrastructure
       console.error(`${serviceName}.${operation}`, error); // log to console instead
 
-      if (error.error.msg) {
+      if (error.error && error.error.msg) {
         alert(error.error.msg);
       }
 

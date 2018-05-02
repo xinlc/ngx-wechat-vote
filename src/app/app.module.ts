@@ -19,6 +19,10 @@ import { CoreModule } from './core/core.module';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found.component';
 
+// 本地服务, 替代 mock
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +33,14 @@ import { PageNotFoundComponent } from './components/page-not-found.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
+
     FlexLayoutModule,
     WeUiModule.forRoot(),
     MatButtonModule,

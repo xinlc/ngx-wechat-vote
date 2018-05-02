@@ -38,12 +38,15 @@ export class VoteService {
   }
 
   getVoteList(page: number, keyword: string): Observable<Voter[]> {
-    const url = `${Network.VOTE_URL}/list`;
+    if (page === 3) {
+      return of([]);
+    }
+    const url = `${Network.VOTE_URL}`;
     const options = {
       params: new HttpParams()
-        .set('keywords', keyword)
-        .set('pn', `${page}`)
-        .set('ps', '12')
+        .set('name', `^${keyword}`)
+        // .set('pn', `${page}`)
+        // .set('ps', '12')
     };
     return this.http.get<Voter[]>(url, options)
       .pipe(
@@ -52,7 +55,7 @@ export class VoteService {
   }
 
   getActivityInfo(): Observable<Activity> {
-    const url = `${Network.VOTE_URL}/commeninfo`;
+    const url = 'api/activity';
     return this.http.get<Activity>(url)
       .pipe(
         catchError(this.handleError('getActivityInfo', {} as Activity))
@@ -124,11 +127,11 @@ export class VoteService {
   }
 
   getRankingList(page: number): Observable<Voter[]> {
-    const url = `${Network.VOTE_URL}/rankinglist`;
+    const url = `${Network.VOTE_URL}`;
     const options = {
       params: new HttpParams()
-        .set('pn', `${page}`)
-        .set('ps', '20')
+        // .set('pn', `${page}`)
+        // .set('ps', '20')
     };
     return this.http.get<Voter[]>(url, options)
       .pipe(
@@ -174,7 +177,7 @@ export class VoteService {
   }
 
   getAccess(): Observable<{}> {
-    const url = `${Network.VOTE_URL}/approver`;
+    const url = `api/voters/1`;
     return this.http.get(url)
       .pipe(
         catchError(this.handleError('getAccess', {}))
