@@ -1,9 +1,11 @@
 # NgxWechatVote
 
 ## Example
-<img src='./doc/demo1.jpeg' width="300px" />
-<img src='./doc/demo2.jpeg' width="300px" />
-<img src='./doc/demo3.jpeg' width="300px" />
+<div>
+  <img src='./doc/demo1.jpeg' width="300px" />
+  <img src='./doc/demo2.jpeg' width="300px" />
+  <img src='./doc/demo3.jpeg' width="300px" />
+</div>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
